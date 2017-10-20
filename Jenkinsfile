@@ -3,7 +3,7 @@
 node('master') {
     try {
         stage('build') {
-            git url: 'git@github.com:shipping-docker/shippingdocker.com.git'
+            git url: 'git@github.com:adamolbookstore/demo-app.git'
 
             // Start services (Let docker-compose build containers for testing)
             sh "./develop up -d"
@@ -12,7 +12,7 @@ node('master') {
             sh "./develop composer install"
 
             // Create .env file for testing
-            sh '/var/lib/jenkins/.venv/bin/aws s3 cp s3://shippingdocker-secrets/env-ci .env'
+            sh '/var/lib/jenkins/.venv/bin/aws s3 cp s3://demoapp-secrets/env-ci .env'
             sh './develop art key:generate'
         }
 
